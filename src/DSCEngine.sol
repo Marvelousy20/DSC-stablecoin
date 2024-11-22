@@ -58,6 +58,7 @@ contract DSCEngine is ReentrancyGuard {
     error DSCEngine__TokenNotAllowedAsCollateral();
     error DSCEngine__TransferFailed();
     error DSCEngine__BreaksHealthFactor();
+    error DSCEngine__MintFailed();
 
     // State variables
     uint256 private constant COLLATERAL_PERCENTAGE = 150;
@@ -147,7 +148,12 @@ contract DSCEngine is ReentrancyGuard {
         s_userToDscMinted[msg.sender] += dscAmountToMint;
         // If they minted too muc DSC that what is allowed due to their collateral, then revert.
         _revertIfHealthFactorIsBroken(msg.sender);
-        
+
+        // Actual minting
+        bool minted = i_dsc.mint(msg.sender, dscAmountToMint);
+        if (!minted) {
+            revert DSCEngine__MintFailed();
+        }
     }
 
     // Private and Internal View Functions
