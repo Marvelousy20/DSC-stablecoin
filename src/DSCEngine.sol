@@ -269,7 +269,7 @@ contract DSCEngine is ReentrancyGuard {
      * @dev Low-level internal function, do not call without checking the health factor first.
      * @param onBehalfOf The user whose debt "dsc" is to be burned
      * @param dscFrom The user who is repaying the dsc.
-     * @param amountDscToBurn The amount of DSC to burn
+     * @param amountDscToBurn The amount of DSC to burn.
      */
     function _burnDSC(address onBehalfOf, address dscFrom, uint256 amountDscToBurn) private {
         s_userToDscMinted[onBehalfOf] -= amountDscToBurn;
