@@ -259,6 +259,9 @@ contract DSCEngine is ReentrancyGuard {
         if (userEndingHealthFactor <= userStartingHealthFactor) {
             revert DSCEngine__HealthFactorNotImproved();
         }
+
+        // Reverts if this operation breaks the liquidaors health factor
+        _revertIfHealthFactorIsBroken(msg.sender);
     }
 
     ///////////////////////////////////////

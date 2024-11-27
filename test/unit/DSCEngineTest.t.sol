@@ -32,6 +32,20 @@ contract DSCEngineTest is Test {
         ERC20Mock(weth).mint(USER, STARTING_ERC20_BALANCE);
     }
 
+     ///////////////////////////
+    // Construction tests /////
+    //////////////////////////
+
+    // Test: Test that the length of the tokenAddress and priceFeeds are equal
+    function testPriceFeedAndTokenLength() public {
+        
+    }
+
+
+    ////////////////////
+    // Price tests /////
+    ////////////////////
+
     // Test: get value of tokens in usd, this is using the chainlink price feeds
     function testGetUsdValue() public {
         // 15 alone would have meant 15 wei
